@@ -12,9 +12,10 @@ import WeatherInfo from './components/WeatherInfo';
 import { colors } from './utils/index';
 import UnitsPicker from './components/UnitsPicker';
 import ReloadIcon from './components/ReloadIcon';
+import WeatherDetails from './components/WeatherDetails';
+import { WEATHER_API } from '@env';
 
 const { BACKGROUND_COLOR, PRIMARY_COLOR } = colors;
-const WEATHER_API  = '1c636e73bec615710535d43a20e161c2';
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather';
 export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -62,6 +63,7 @@ export default function App() {
         <View style={styles.unitsPicker}>
           <UnitsPicker unitsSystem={unitsSystem} setUnitSystem={setUnitSystem} />
         </View>
+        <WeatherDetails currentWeather={currentWeather} />
       </View>
     );
   } else if (errorMessage) {
@@ -88,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: BACKGROUND_COLOR,
+    opacity: 0.6,
     justifyContent: 'center',
 	},
 
