@@ -2,16 +2,17 @@ import React from 'react'
 import { View, Platform, StyleSheet } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
-export default function ReloadIcon({ refreshing, setRefreshing }) {
+export default function ReloadIcon({ load }) {
   const reloadIconName = Platform.OS === 'ios' ? 'ios-refresh' : 'md-refresh'
 
   return (
-    <View>
+    <View style={styles.ReloadIcon}>
       <Ionicons
-        style={styles.ReloadIcon}
+        onPress={load}
         name={reloadIconName}
-        size={34}
+        size={30}
         color="#000"
+        style={styles.Icon}
       />
     </View>
   )
@@ -20,8 +21,15 @@ export default function ReloadIcon({ refreshing, setRefreshing }) {
 const styles = StyleSheet.create({
   ReloadIcon: {
     position: 'absolute',
-    right: '45%',
-    left: '45%',
-    zIndex: 1,
+    top: 80,
+    right: 30,
+    backgroundColor: '#f8f8f8',
+    borderRadius: 50,
+    padding: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
   },
 })

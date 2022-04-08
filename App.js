@@ -5,8 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator,
-  RefreshControl
+  ActivityIndicator
 } from 'react-native';
 import * as Location from 'expo-location';
 import WeatherInfo from './components/WeatherInfo';
@@ -21,7 +20,6 @@ export default function App() {
   const [errorMessage, setErrorMessage] = useState(null);
   const [currentWeather, setCurrentWeather] = useState(null);
   const [unitsSystem, setUnitSystem] = useState('metric');
-  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(async() => {
     load()
@@ -58,8 +56,10 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
-          <ReloadIcon />
+          <ReloadIcon load={load} />
           <WeatherInfo currentWeather={currentWeather} />
+        </View>
+        <View style={styles.unitsPicker}>
           <UnitsPicker unitsSystem={unitsSystem} setUnitSystem={setUnitSystem} />
         </View>
       </View>
@@ -95,4 +95,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+
+  unitsPicker: {
+    position: 'absolute',
+    top: '0%',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 2,
+    width: '50%',
+  }
 });
